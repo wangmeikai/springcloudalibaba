@@ -1,0 +1,24 @@
+server:
+  port: 9001
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 121.196.105.239:8848
+          #metadata:
+        #version: v1
+        #namespace: c22321bc-30e0-4cf4-8ac6-6db8abd03dc2
+        #group: pay
+        #cluster-name: NJ
+  #      config:
+  #        server-addr: 127.0.0.1:8848
+  application:
+    name: consumer-application
+
+
+logging:
+  level:
+    com:
+      wmk:
+        feignservice: debug
