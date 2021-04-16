@@ -123,7 +123,7 @@ public class HelloWorldController {
     public String m2() {
         //开始执行 自己的业务方法
         System.out.println("public String m2()===============");
-        int i= 1/0;
+        //int i= 1/0;
         return "OK2";
     }
 
