@@ -22,3 +22,7 @@ logging:
     com:
       wmk:
         feignservice: debug
+
+feign:
+  sentinel:
+    enabled: true

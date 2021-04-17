@@ -10,7 +10,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  **/
 @SpringBootApplication
 public class SentinelMainApp {
+
     public static void main(String[] args) {
+
         SpringApplication.run(SentinelMainApp.class,args);
     }
 }

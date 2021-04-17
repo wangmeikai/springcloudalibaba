@@ -34,3 +34,8 @@ management:
 #feign:
 #  sentinel:
 #    enabled: true # 激活Sentinel对Feign的支持
+
+# 开启@SentinelRestTemplate注解 整合ribbon
+#resttemplate:
+#  sentinel:
+#    enabled: true

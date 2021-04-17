@@ -22,6 +22,7 @@ public class FeignConfig {
 //        return Logger.Level.NONE;   //默认值
     }
 
+    // feign的拦截器
     @Bean
     public RequestInterceptor requestInterceptor(){
         return new FeignIntercepter();
