@@ -14,7 +14,7 @@ spring:
         dashboard: localhost:8080   #配置Sentinel dashboard地址
         port: 8719   # 在应用对应的机器上启动一个Http Server，该Server会与 Sentinel控制台做交互，不配默认8719
       filter:
-        enabled: false
+        enabled: true
 #      datasource:
 #        ds1:
 #          nacos:
@@ -34,3 +34,8 @@ management:
 #feign:
 #  sentinel:
 #    enabled: true # 激活Sentinel对Feign的支持
+
+# 开启@SentinelRestTemplate注解 整合ribbon
+#resttemplate:
+#  sentinel:
+#    enabled: true

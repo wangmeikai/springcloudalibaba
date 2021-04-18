@@ -4,11 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
-* @vlog: 高于生活，源于生活
 * @desc: 类的描述:Sentinel 规则持久化 常量配置类
-* @author: smlz
-* @createDate: 2019/11/28 16:23
-* @version: 1.0
 */
 public class PersistenceRuleConstant {
 

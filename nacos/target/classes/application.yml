@@ -12,6 +12,6 @@ spring:
         #namespace: c22321bc-30e0-4cf4-8ac6-6db8abd03dc2
         #group: pay
         #cluster-name: NJ
-        #port: 8888
+        port: 8888
   application:
     name: provider-application

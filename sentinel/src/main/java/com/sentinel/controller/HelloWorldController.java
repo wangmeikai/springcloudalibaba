@@ -5,6 +5,7 @@ import com.alibaba.csp.sentinel.SphU;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.alibaba.csp.sentinel.slots.block.RuleConstant;
+import com.alibaba.csp.sentinel.slots.block.degrade.DegradeException;
 import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRule;
 import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRuleManager;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
@@ -14,7 +15,6 @@ import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowRule;
 import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowRuleManager;
 import com.sentinel.utils.MyBlockHandler;
 import com.sentinel.utils.MyFallback;
-import com.sun.org.apache.xml.internal.security.Init;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -101,12 +101,15 @@ public class HelloWorldController {
         //关联受保护的资源
         try {
             entity = SphU.entry("HelloWorldController_m1");
-            //开始执行 自己的业务方法
+            //TODO 开始执行 自己的业务方法
             System.out.println(a);
-            //结束执行自己的业务方法
+            //TODO 结束执行自己的业务方法
         } catch (BlockException e) {
+
             return "HelloWorldController_m1方法被流控了";
-        }finally {
+        } catch (Throwable throwable){
+            System.out.println(throwable.getMessage());
+        } finally {
             if(entity!=null) {
                 entity.exit();
             }
@@ -121,7 +124,7 @@ public class HelloWorldController {
             blockHandlerClass = MyBlockHandler.class, blockHandler ="m2BlockHandler",
             fallbackClass = MyFallback.class, fallback = "m2fallback")
     public String m2() {
-        //开始执行 自己的业务方法
+        //TODO 开始执行 自己的业务方法
         System.out.println("public String m2()===============");
         //int i= 1/0;
         return "OK2";
