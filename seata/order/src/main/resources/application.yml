@@ -1,16 +1,77 @@
 server:
   port: 8421
 
-
 spring:
   datasource:
-    url: jdbc:mysql://121.196.105.239:3306/order_table?serverTimezone=GMT%2B8
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: root
+    druid:
+      initial-size: 5 #连接池初始化大小
+      min-idle: 10 #最小空闲连接数
+      max-active: 20 #最大连接数
+      web-stat-filter:
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*" #不统计这些请求数据
+      stat-view-servlet: #访问监控网页的登录用户名和密码
+        login-username: druid
+        login-password: druid
+      url: jdbc:mysql://121.196.105.239:3306/order_table?serverTimezone=GMT%2B8
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: root
     type: com.alibaba.druid.pool.DruidDataSource
   application:
-    name: order_service
+    name: order-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 121.196.105.239:8848
+        username: nacos
+        password: nacos
+        #metadata:
+          #version: v1
+        namespace: 84eeca25-3230-4e13-9e53-b29132cd40cd
+        #group: pay
+        #cluster-name: NJ
+
+seata:
+  config:
+    nacos:
+      server-addr: 121.196.105.239:8848
+      group: SEATA_GROUP
+      namespace: 84eeca25-3230-4e13-9e53-b29132cd40cd
+    type: nacos
+  registry:
+    type: nacos
+    nacos:
+      server-addr: 121.196.105.239:8848
+      group: SEATA_GROUP
+      namespace: 84eeca25-3230-4e13-9e53-b29132cd40cd
+  service:
+    vgroup-mapping:
+      my_test_tx_group: default  # 与nacos-config中一致
+    disable-global-transaction: false
+  client:
+    rm:
+      report-success-enable: false
+  enabled: true
+  enable-auto-data-source-proxy: true
+  tx-service-group: my_test_tx_group
+
+#ribbon的超时时间
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+#  MaxAutoRetries: 1 #同一台实例最大重试次数,不包括首次调用
+#  MaxAutoRetriesNextServer: 1 #重试负载均衡其他的实例最大重试次数,不包括首次调用
+#  OkToRetryOnAllOperations: false  #是否所有操作都重试
+#  MaxTotalConnections: 500  #最大连接数
+#  MaxConnectionsPerHost: 500  # 每个host最大连接数
+#  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RetryRule  #负载均衡策略
+
+
+# 对具体的服务设置超时时间
+#application-name:
+#  ribbon.ReadTimeout: 8000
+#  ribbon.ConnectTimeout: 6000
+
 
 #mybatis配置文件和mapper映射文件
 mybatis:

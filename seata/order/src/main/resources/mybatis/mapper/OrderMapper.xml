@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wmk.mapper.">
+<mapper namespace="com.wmk.mapper.OrderMapper">
 
 
 
@@ -10,5 +10,8 @@
 <!--        insert into datetest(`date`, time_stamp, date_time) values(#{date}, #{timeStamp}, #{dateTime})-->
 <!--    </insert>-->
 
+    <update id="addOrderCount">
+        update order_table.`order` set order_count = order_count + 1 where id = 1
+    </update>
 
 </mapper>
