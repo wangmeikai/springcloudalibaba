@@ -27,13 +27,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-//    @Transactional
+    @Transactional
     @GlobalTransactional(name = "creat-order" ,rollbackFor = Exception.class)
     public int addOrderCount() {
         int i = orderMapper.addOrderCount();
         System.out.println("======================"+i);
         String s = productFeignService.descProductCount();
-
+        int a = 1/0;
         return i;
     }
 }

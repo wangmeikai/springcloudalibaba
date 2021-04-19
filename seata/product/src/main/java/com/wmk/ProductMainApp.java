@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan("com.wmk.mapper")
 @EnableDiscoveryClient
 @EnableFeignClients
-//@EnableTransactionManagement
+@EnableTransactionManagement
 public class ProductMainApp {
     public static void main(String[] args) {
         SpringApplication.run(ProductMainApp.class,args);

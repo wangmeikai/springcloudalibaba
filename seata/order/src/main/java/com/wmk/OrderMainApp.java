@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan("com.wmk.mapper")
 @EnableDiscoveryClient
 @EnableFeignClients
-//@EnableTransactionManagement  //开启spring事务
+@EnableTransactionManagement  //开启spring事务
 public class OrderMainApp {
     public static void main(String[] args) {
         SpringApplication.run(OrderMainApp.class,args);
