@@ -33,12 +33,12 @@
             <scope>test</scope>
         </dependency>
 
-<!--        &lt;!&ndash;SpringCloud ailibaba nacos &ndash;&gt;-->
+        <!--SpringCloud ailibaba nacos -->
 <!--        <dependency>-->
 <!--            <groupId>com.alibaba.cloud</groupId>-->
 <!--            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
 <!--        </dependency>-->
-<!--        &lt;!&ndash;SpringCloud ailibaba sentinel-datasource-nacos 后续做持久化用到&ndash;&gt;-->
+        <!--SpringCloud ailibaba sentinel-datasource-nacos 后续做持久化用到-->
 <!--        <dependency>-->
 <!--            <groupId>com.alibaba.csp</groupId>-->
 <!--            <artifactId>sentinel-datasource-nacos</artifactId>-->

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wmk.mapper.">
+
+
+
+<!--    <insert id="insertTime" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="DateTest" >-->
+<!--        insert into datetest(`date`, time_stamp, date_time) values(#{date}, #{timeStamp}, #{dateTime})-->
+<!--    </insert>-->
+
+
+</mapper>

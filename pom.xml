@@ -8,6 +8,7 @@
         <module>ribbon</module>
         <module>feign</module>
         <module>sentinel</module>
+        <module>seata</module>
     </modules>
 
     <groupId>org.wmk</groupId>

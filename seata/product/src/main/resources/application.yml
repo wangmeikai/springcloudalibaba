@@ -1,0 +1,24 @@
+server:
+  port: 8420
+
+spring:
+  datasource:
+    url: jdbc:mysql://121.196.105.239:3306/product_table?serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+  application:
+    name: product_service
+
+#mybatis配置文件和mapper映射文件
+mybatis:
+  mapper‐locations: classpath:mybatis/mapper/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml
+  # type-aliases-package: com.wmk.pojo  #不影响运行，但是会变红
+#日志
+logging:
+  pattern:
+    console: '%logger{50} == %msg%n'
+  level:
+    com.wmk.mapper: debug
