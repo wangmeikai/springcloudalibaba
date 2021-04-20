@@ -1,17 +1,19 @@
-#spring:
-#  cloud:
-#    nacos:
-#      config:
-#        server-addr: 121.196.105.239:8848
-#        file-extension: yml
-#        # 跨工程的公用配置文件
-##        shared-configs:
-##          - data-id: common.yml
-##            group: DEFAULT_GROUP
-##            refresh: true
-#  application:
-#    name: provider-application
-#  profiles:
-#    active: dev
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 121.196.105.239:8848
+        username: nacos
+        password: nacos
+        file-extension: yml
+        # 跨工程的公用配置文件
+  #        shared-configs:
+#          - data-id: common.yml
+#            group: DEFAULT_GROUP
+#            refresh: true
+  application:
+    name: provider-application
+  profiles:
+    active: dev
 # provider-application-dev.yml  本工程指定的配置文件
 # provider-application.yml  同工程的通用配置文件
