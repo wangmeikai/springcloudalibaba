@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  **/
 //剔除自动装配的数据源
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-@MapperScan("com.wmk.mapper")
+@MapperScan("com.wmk.mapper")  // 扫描mapper接口
 @EnableDiscoveryClient
 @EnableFeignClients
 @EnableTransactionManagement  //开启spring事务

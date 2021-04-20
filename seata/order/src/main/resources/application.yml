@@ -25,8 +25,9 @@ spring:
         server-addr: 121.196.105.239:8848
         username: nacos
         password: nacos
-        #metadata:
+        metadata:
           #version: v1
+          #其他自定义元数据: xxx
         namespace: 84eeca25-3230-4e13-9e53-b29132cd40cd
         #group: pay
         #cluster-name: NJ
@@ -77,11 +78,16 @@ ribbon:
 #  ribbon.ConnectTimeout: 6000
 
 
-#mybatis配置文件和mapper映射文件
+# mybatis配置文件和 mapper映射文件
 mybatis:
-  mapper‐locations: classpath:mybatis/mapper/*.xml
+  #如果Mapper.xml与Mapper.class在同一个包下且同名，spring扫描Mapper.class的同时会自动扫描同名的Mapper.xml并装配到Mapper.class。
+  #如果Mapper.xml与Mapper.class不在同一个包下或者不同名，就必须使用配置mapperLocations指定mapper.xml的位置。
+  mapper‐locations: classpath:mybatis/mapper/*.xml   # 扫描Mapper接口对应的XML文件
+  # mybatis配置文件位置
   config-location: classpath:mybatis/mybatis-config.xml
-  # type-aliases-package: com.wmk.pojo  #不影响运行，但是会变红
+  #type-aliases-package: com.wmk.pojo  #不影响运行，但是会变红
+
+
 #日志
 logging:
   pattern:
