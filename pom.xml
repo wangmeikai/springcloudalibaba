@@ -9,6 +9,7 @@
         <module>feign</module>
         <module>sentinel</module>
         <module>seata</module>
+        <module>rpc</module>
     </modules>
 
     <groupId>org.wmk</groupId>

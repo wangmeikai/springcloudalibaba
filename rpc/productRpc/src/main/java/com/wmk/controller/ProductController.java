@@ -24,7 +24,6 @@ public class ProductController {
     @ResponseBody
     public String descProductCount(){
         int i = productService.descProductCount();
-        //int a = 1/0;
         System.out.println(i);
         return "product ok";
     }
