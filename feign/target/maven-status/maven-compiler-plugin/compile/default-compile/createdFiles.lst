@@ -1,0 +1,8 @@
+com\feign\intercepter\FeignIntercepter.class
+com\feign\util\FeignApiFallbackFactory$1.class
+com\feign\util\FeignApiFallback.class
+com\feign\FeignMainApp.class
+com\feign\feignservice\FeignApi.class
+com\feign\config\FeignConfig.class
+com\feign\util\FeignApiFallbackFactory.class
+com\feign\controller\FeignController.class

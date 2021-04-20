@@ -1,0 +1,7 @@
+com\wmk\controller\ProductController.class
+com\wmk\ProductRpcMainApp.class
+com\wmk\common\Result.class
+com\wmk\pojo\Product.class
+com\wmk\mapper\ProductMapper.class
+com\wmk\service\impl\ProductServiceImpl.class
+com\wmk\service\ProductService.class
