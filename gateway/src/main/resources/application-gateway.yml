@@ -7,12 +7,14 @@ spring:
           uri: lb://orderRpc-service  # 负载均衡
           predicates:
             - Path=/order/{param}/**         #指定路径下的请求(用的最多)
+            #- Wmk=wangmeikai    # 自定义断言工厂
           filters: # 从上到下执行
 #            - PrefixPath=/order
 #            - StripPrefix=1
             - AddRequestHeader=X-Request-red, {param}
             - AddRequestParameter=name, {param}
             - AddResponseHeader=school, {param}
+            #- Wmk=enable, true   # 自定义局部过滤器
 
         - id: productRpc-service
           uri: lb://productRpc-service  # 负载均衡
