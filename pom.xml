@@ -10,6 +10,7 @@
         <module>sentinel</module>
         <module>seata</module>
         <module>rpc</module>
+        <module>gateway</module>
     </modules>
 
     <groupId>org.wmk</groupId>

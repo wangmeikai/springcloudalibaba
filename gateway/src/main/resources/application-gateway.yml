@@ -1,0 +1,41 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: orderRpc-service
+#          uri: http://ip:port
+          uri: lb://orderRpc-service  # 负载均衡
+          predicates:
+            - Path=/order/{param}/**         #指定路径下的请求(用的最多)
+          filters: # 从上到下执行
+#            - PrefixPath=/order
+#            - StripPrefix=1
+            - AddRequestHeader=X-Request-red, {param}
+            - AddRequestParameter=name, {param}
+            - AddResponseHeader=school, {param}
+
+        - id: productRpc-service
+          uri: lb://productRpc-service  # 负载均衡
+          predicates:
+            - Path=/product/**
+#            - Before=2021-04-21T11:57:28.213+08:00[Asia/Shanghai]       #指定时间之前  ZonedDateTime.now()
+#            - After        #指定时间之后
+#            - Between      #设定一个时间区间，两个时间用逗号隔开
+#            - Cookie
+#            - Header
+#            - Host         #设定一个主机名
+#            - Method=GET   #指定请求的方法
+#            - Query        #指定一个请求参数的key
+#            - ReadyBody
+#            - RemoteAddr   #指定ip
+#            - Weight
+#            - CloudFoundry
+#          filters:
+#            - PrefixPath=/product  # 添加路径前缀
+#            - StripPrefix=1     # 去掉路径中的前几个前缀        ===>  /a/b/c ->  /path/c
+#            - AddRequestHeader=X-Request-red, blue     # key,value
+#            - AddRequestParameter=red, blue
+#            - AddResponseHeader=X-Response-Red, Blue
+
+
+
