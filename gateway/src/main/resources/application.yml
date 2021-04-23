@@ -8,37 +8,25 @@ spring:
     nacos:
       discovery:
         server-addr: 121.196.105.239:8848
-        namespace: 84eeca25-3230-4e13-9e53-b29132cd40cd
+        namespace: 95d7cfcb-6706-4be9-960d-dd0c89da171b
     gateway:
       enabled: true  # 是否启用网关
       discovery:
         locator:
           enabled: false   # 能否根据微服务名称进行映射调用(生产不推荐，暴露了微服务)  http://localhost:7777/orderRpc-service/order/addOrderCount
 #          lower-case-service-id: true
-#      globalcors:                         # 跨域配置
-#        cors-configurations:
-#          '[/**]':
-#            allow-credentials: true       # 允许携带认证信息
-#            allowed-origins:              # 允许跨域的源(网站域名/ip)，设置*为全部
-#              - "http://localhost:13009"
-#              - "http://localhost:13010"
-#            allowed-headers: "*"          # 允许跨域请求里的head字段，设置*为全部
-#            allowed-methods:              # 允许跨域的method， 默认为GET和OPTIONS，设置*为全部
-#              - OPTIONS
-#              - GET
-#              - POST
-#            max-age: 3600                 # 跨域允许的有效期
-#            exposed-headers:             # 允许response的head信息
-                                          # 默认仅允许如下6个：
-                                          #  Cache-Control
-                                          #  Content-Language
-                                          #  Content-Type
-                                          #  Expires
-                                          #  Last-Modified
-                                          #  Pragma
-
     sentinel:
       transport:
-        dashboard: localhost:9999
+        dashboard: localhost:8080
+      datasource:
+        flow:
+          nacos:
+            server-addr: 121.196.105.239:8848
+            username: naocs
+            password: naocs
+            namespace: 95d7cfcb-6706-4be9-960d-dd0c89da171b
+            groupId: SENTINEL_GROUP
+            dataId: ${spring.application.name}-gw-api-group
+            rule-type: flow
   profiles:
     active: gateway    # 可以加载多个，用逗号隔开

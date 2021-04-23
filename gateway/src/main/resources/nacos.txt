@@ -1,0 +1,35 @@
+网关:
+    "app": "gateway",
+    "burst": 0,
+    "controlBehavior": 0,
+    "count": 1,
+    "gmtCreate": 1619145498487,
+    "gmtModified": 1619145498487,
+    "grade": 1,
+    "id": 1,
+    "interval": 11,
+    "intervalUnit": 0,
+    "resource": "orderRpc-service",
+    "resourceMode": 0
+
+其他微服务：
+    "app": "sentinel-service",
+    "clusterConfig": {
+    "fallbackToLocalWhenFail": true,
+    "sampleCount": 10,
+    "strategy": 0,
+    "thresholdType": 0,
+    "windowIntervalMs": 1000
+    },
+    "clusterMode": false,
+    "controlBehavior": 0,
+    "count": 1,
+    "gmtCreate": 1619148376660,
+    "gmtModified": 1619148376660,
+    "grade": 1,
+    "id": 1,
+    "ip": "219.221.192.169",
+    "limitApp": "default",
+    "port": 8720,
+    "resource": "HelloWorldController_m2",
+    "strategy": 0

@@ -36,61 +36,61 @@ import java.util.concurrent.TimeUnit;
 @Controller
 public class HelloWorldController {
 
-    @PostConstruct
-    public void init(){
-        List<FlowRule> flowRules = new ArrayList<>();
-        /**
-         * 定义 HelloWorldController_m1 受保护的资源的规则
-         */
-        //创建流控规则对象
-        FlowRule flowRule = new FlowRule();
-        //设置流控规则 QPS
-        flowRule.setGrade(RuleConstant.FLOW_GRADE_QPS);
-        //设置受保护的资源
-        flowRule.setResource("HelloWorldController_m1");
-        //设置受保护的资源的阈值
-        flowRule.setCount(1);
-
-        /**
-         * 定义 HelloWorldController_m2 受保护的资源的规则
-         */
-        //创建流控规则对象
-        FlowRule flowRule2 = new FlowRule();
-        //设置流控规则 QPS
-        flowRule2.setGrade(RuleConstant.FLOW_GRADE_QPS);
-        //设置受保护的资源
-        flowRule2.setResource("HelloWorldController_m2");
-        //设置受保护的资源的阈值
-        flowRule2.setCount(1);
-
-        flowRules.add(flowRule);
-        flowRules.add(flowRule2);
-
-        //加载配置好的规则
-        FlowRuleManager.loadRules(flowRules);
-
-        //降级配置
-//        DegradeRule degradeRule = new DegradeRule();
-//        degradeRule.setGrade(RuleConstant.DEGRADE_GRADE_EXCEPTION_COUNT);
-//        degradeRule.setCount(1);
-//        degradeRule.setTimeWindow(10);
-//        degradeRule.setResource("HelloWorldController_m1");
+    //@PostConstruct
+//    public void init(){
+//        List<FlowRule> flowRules = new ArrayList<>();
+//        /**
+//         * 定义 HelloWorldController_m1 受保护的资源的规则
+//         */
+//        //创建流控规则对象
+//        FlowRule flowRule = new FlowRule();
+//        //设置流控规则 QPS
+//        flowRule.setGrade(RuleConstant.FLOW_GRADE_QPS);
+//        //设置受保护的资源
+//        flowRule.setResource("HelloWorldController_m1");
+//        //设置受保护的资源的阈值
+//        flowRule.setCount(1);
 //
-//        DegradeRuleManager.loadRules(Arrays.asList(degradeRule));
-
-//        //热点配置
-//        ParamFlowRule rule = new ParamFlowRule("HelloWorldController_m1")
-//                .setParamIdx(0)
-//                .setCount(5);
-//        // 针对 int 类型的参数 PARAM_B，单独设置限流 QPS 阈值为 10，而不是全局的阈值 5.
-//        ParamFlowItem item = new ParamFlowItem().setObject("a")
-//                .setClassType(int.class.getName())
-//                .setCount(10);
-//        rule.setParamFlowItemList(Collections.singletonList(item));
+//        /**
+//         * 定义 HelloWorldController_m2 受保护的资源的规则
+//         */
+//        //创建流控规则对象
+//        FlowRule flowRule2 = new FlowRule();
+//        //设置流控规则 QPS
+//        flowRule2.setGrade(RuleConstant.FLOW_GRADE_QPS);
+//        //设置受保护的资源
+//        flowRule2.setResource("HelloWorldController_m2");
+//        //设置受保护的资源的阈值
+//        flowRule2.setCount(1);
 //
-//        ParamFlowRuleManager.loadRules(Collections.singletonList(rule));
-
-    }
+//        flowRules.add(flowRule);
+//        flowRules.add(flowRule2);
+//
+//        //加载配置好的规则
+//        FlowRuleManager.loadRules(flowRules);
+//
+//        //降级配置
+////        DegradeRule degradeRule = new DegradeRule();
+////        degradeRule.setGrade(RuleConstant.DEGRADE_GRADE_EXCEPTION_COUNT);
+////        degradeRule.setCount(1);
+////        degradeRule.setTimeWindow(10);
+////        degradeRule.setResource("HelloWorldController_m1");
+////
+////        DegradeRuleManager.loadRules(Arrays.asList(degradeRule));
+//
+////        //热点配置
+////        ParamFlowRule rule = new ParamFlowRule("HelloWorldController_m1")
+////                .setParamIdx(0)
+////                .setCount(5);
+////        // 针对 int 类型的参数 PARAM_B，单独设置限流 QPS 阈值为 10，而不是全局的阈值 5.
+////        ParamFlowItem item = new ParamFlowItem().setObject("a")
+////                .setClassType(int.class.getName())
+////                .setCount(10);
+////        rule.setParamFlowItemList(Collections.singletonList(item));
+////
+////        ParamFlowRuleManager.loadRules(Collections.singletonList(rule));
+//
+//    }
 
     @RequestMapping("/m1")
     @ResponseBody
