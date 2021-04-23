@@ -22,16 +22,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * poll持久化方式
+ */
 public class PullModeByFileDataSource implements InitFunc {
 
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-
     @Override
-    public void init() throws Exception {
-        //log.info("time:{}读取配置",sdf.format(new Date()));
-
+    public void init() {
         try {
-
             //创建文件存储目录
             RuleFileUtils.mkdirIfNotExits(PersistenceRuleConstant.storePath);
             //创建规则文件
@@ -48,7 +46,7 @@ public class PullModeByFileDataSource implements InitFunc {
             dealAuthRules();
 
         }catch (Exception e) {
-            //log.error("错误原因:{}",e);
+            e.printStackTrace();
         }
 
     }
@@ -64,7 +62,7 @@ public class PullModeByFileDataSource implements InitFunc {
                 ruleFilePath,RuleListParserUtils.flowRuleListParser
         );*/
 
-        ReadableDataSource<String, List<FlowRule>> flowRuleRDS = new FileRefreshableDataSource(
+        ReadableDataSource<String, List<FlowRule>> flowRuleRDS = new FileRefreshableDataSource<>(
                 new File(ruleFilePath),RuleListParserUtils.flowRuleListParser,20000,1024 * 1024, Charset.forName("utf-8")
         );
 
@@ -89,7 +87,7 @@ public class PullModeByFileDataSource implements InitFunc {
         String degradeRuleFilePath = PersistenceRuleConstant.rulesMap.get(PersistenceRuleConstant.DEGRAGE_RULE_PATH).toString();
 
         //创建流控规则的可读数据源
-        ReadableDataSource<String, List<DegradeRule>> degradeRuleRDS = new FileRefreshableDataSource(
+        ReadableDataSource<String, List<DegradeRule>> degradeRuleRDS = new FileRefreshableDataSource<>(
                 degradeRuleFilePath,RuleListParserUtils.degradeRuleListParse
         );
 
@@ -114,7 +112,7 @@ public class PullModeByFileDataSource implements InitFunc {
         String systemRuleFilePath = PersistenceRuleConstant.rulesMap.get(PersistenceRuleConstant.SYSTEM_RULE_PATH).toString();
 
         //创建流控规则的可读数据源
-        ReadableDataSource<String, List<SystemRule>> systemRuleRDS = new FileRefreshableDataSource(
+        ReadableDataSource<String, List<SystemRule>> systemRuleRDS = new FileRefreshableDataSource<>(
                 systemRuleFilePath,RuleListParserUtils.sysRuleListParse
         );
 
@@ -139,7 +137,7 @@ public class PullModeByFileDataSource implements InitFunc {
         String paramFlowRuleFilePath = PersistenceRuleConstant.rulesMap.get(PersistenceRuleConstant.HOT_PARAM_RULE).toString();
 
         //创建流控规则的可读数据源
-        ReadableDataSource<String, List<ParamFlowRule>> paramFlowRuleRDS = new FileRefreshableDataSource(
+        ReadableDataSource<String, List<ParamFlowRule>> paramFlowRuleRDS = new FileRefreshableDataSource<>(
                 paramFlowRuleFilePath,RuleListParserUtils.paramFlowRuleListParse
         );
 
@@ -164,7 +162,7 @@ public class PullModeByFileDataSource implements InitFunc {
         String authFilePath = PersistenceRuleConstant.rulesMap.get(PersistenceRuleConstant.AUTH_RULE_PATH).toString();
 
         //创建流控规则的可读数据源
-        ReadableDataSource<String, List<AuthorityRule>> authRuleRDS = new FileRefreshableDataSource(
+        ReadableDataSource<String, List<AuthorityRule>> authRuleRDS = new FileRefreshableDataSource<>(
                 authFilePath,RuleListParserUtils.authorityRuleParse
         );
 

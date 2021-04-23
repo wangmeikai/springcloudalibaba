@@ -12,7 +12,7 @@ spring:
         #metadata:
           #version: v1
           #其他自定义元数据: xxx
-        namespace: 95d7cfcb-6706-4be9-960d-dd0c89da171b
+        #namespace: 95d7cfcb-6706-4be9-960d-dd0c89da171b
         #group: pay
         #cluster-name: NJ
   profiles:

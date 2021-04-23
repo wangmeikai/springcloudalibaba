@@ -8,7 +8,7 @@ spring:
     nacos:
       discovery:
         server-addr: 121.196.105.239:8848
-        namespace: 95d7cfcb-6706-4be9-960d-dd0c89da171b
+        #namespace: 95d7cfcb-6706-4be9-960d-dd0c89da171b
     gateway:
       enabled: true  # 是否启用网关
       discovery:
@@ -18,15 +18,15 @@ spring:
     sentinel:
       transport:
         dashboard: localhost:8080
-      datasource:
-        flow:
-          nacos:
-            server-addr: 121.196.105.239:8848
-            username: naocs
-            password: naocs
-            namespace: 95d7cfcb-6706-4be9-960d-dd0c89da171b
-            groupId: SENTINEL_GROUP
-            dataId: ${spring.application.name}-gw-api-group
-            rule-type: flow
+#      datasource:
+#        flow:
+#          nacos:
+#            server-addr: 121.196.105.239:8848
+#            username: naocs
+#            password: naocs
+#            #namespace: 95d7cfcb-6706-4be9-960d-dd0c89da171b
+#            groupId: SENTINEL_GROUP
+#            dataId: ${spring.application.name}-gw-api-group
+#            rule-type: flow
   profiles:
     active: gateway    # 可以加载多个，用逗号隔开

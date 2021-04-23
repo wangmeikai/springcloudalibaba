@@ -16,7 +16,7 @@ public class PersistenceRuleConstant {
     /**
      * 各种存储sentinel规则映射map
      */
-    public static final Map rulesMap = new HashMap<String,String>();
+    public static final Map<String,String> rulesMap = new HashMap<>();
 
     //流控规则文件
     public static final String FLOW_RULE_PATH = "flowRulePath";
