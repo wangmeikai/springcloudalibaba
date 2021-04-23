@@ -55,7 +55,7 @@ public class PullModeByFileDataSource implements InitFunc {
      * 方法实现说明:处理流控规则逻辑
      */
     private void dealFlowRules() throws FileNotFoundException {
-        String ruleFilePath = PersistenceRuleConstant.rulesMap.get(PersistenceRuleConstant.FLOW_RULE_PATH).toString();
+        String ruleFilePath = PersistenceRuleConstant.rulesMap.get(PersistenceRuleConstant.FLOW_RULE_PATH);
 
         //创建流控规则的可读数据源
 /*        ReadableDataSource<String, List<FlowRule>> flowRuleRDS = new FileRefreshableDataSource(
@@ -63,8 +63,9 @@ public class PullModeByFileDataSource implements InitFunc {
         );*/
 
         ReadableDataSource<String, List<FlowRule>> flowRuleRDS = new FileRefreshableDataSource<>(
-                new File(ruleFilePath),RuleListParserUtils.flowRuleListParser,20000,1024 * 1024, Charset.forName("utf-8")
-        );
+                new File(ruleFilePath),
+                RuleListParserUtils.flowRuleListParser,
+                2000,1024 * 1024, Charset.forName("utf-8"));
 
         // 将可读数据源注册至FlowRuleManager 这样当规则文件发生变化时，就会更新规则到内存
         FlowRuleManager.register2Property(flowRuleRDS.getProperty());
@@ -84,7 +85,7 @@ public class PullModeByFileDataSource implements InitFunc {
      */
     private void dealDegradeRules() throws FileNotFoundException {
         //讲解规则文件路径
-        String degradeRuleFilePath = PersistenceRuleConstant.rulesMap.get(PersistenceRuleConstant.DEGRAGE_RULE_PATH).toString();
+        String degradeRuleFilePath = PersistenceRuleConstant.rulesMap.get(PersistenceRuleConstant.DEGRAGE_RULE_PATH);
 
         //创建流控规则的可读数据源
         ReadableDataSource<String, List<DegradeRule>> degradeRuleRDS = new FileRefreshableDataSource<>(
@@ -109,7 +110,7 @@ public class PullModeByFileDataSource implements InitFunc {
      */
     private void dealSystemRules() throws FileNotFoundException {
         //讲解规则文件路径
-        String systemRuleFilePath = PersistenceRuleConstant.rulesMap.get(PersistenceRuleConstant.SYSTEM_RULE_PATH).toString();
+        String systemRuleFilePath = PersistenceRuleConstant.rulesMap.get(PersistenceRuleConstant.SYSTEM_RULE_PATH);
 
         //创建流控规则的可读数据源
         ReadableDataSource<String, List<SystemRule>> systemRuleRDS = new FileRefreshableDataSource<>(
@@ -134,7 +135,7 @@ public class PullModeByFileDataSource implements InitFunc {
      */
     private void dealParamFlowRules() throws FileNotFoundException {
         //讲解规则文件路径
-        String paramFlowRuleFilePath = PersistenceRuleConstant.rulesMap.get(PersistenceRuleConstant.HOT_PARAM_RULE).toString();
+        String paramFlowRuleFilePath = PersistenceRuleConstant.rulesMap.get(PersistenceRuleConstant.HOT_PARAM_RULE);
 
         //创建流控规则的可读数据源
         ReadableDataSource<String, List<ParamFlowRule>> paramFlowRuleRDS = new FileRefreshableDataSource<>(
@@ -159,7 +160,7 @@ public class PullModeByFileDataSource implements InitFunc {
      */
     private void dealAuthRules() throws FileNotFoundException {
         //讲解规则文件路径
-        String authFilePath = PersistenceRuleConstant.rulesMap.get(PersistenceRuleConstant.AUTH_RULE_PATH).toString();
+        String authFilePath = PersistenceRuleConstant.rulesMap.get(PersistenceRuleConstant.AUTH_RULE_PATH);
 
         //创建流控规则的可读数据源
         ReadableDataSource<String, List<AuthorityRule>> authRuleRDS = new FileRefreshableDataSource<>(
