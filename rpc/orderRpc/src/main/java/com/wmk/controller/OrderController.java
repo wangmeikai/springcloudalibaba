@@ -33,4 +33,14 @@ public class OrderController {
         return "Order ok";
     }
 
+    @GetMapping
+    @ResponseBody
+    public String m(String name,HttpServletRequest request){
+        System.out.println("网关处添加的请求头："+request.getHeader("X-Request-red"));
+        System.out.println("网关处添加的请求参数："+name);
+        int i = orderService.addOrderCount();
+        System.out.println(i);
+        return "Order ok";
+    }
+
 }

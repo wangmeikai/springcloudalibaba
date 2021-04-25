@@ -11,6 +11,7 @@
         <module>seata</module>
         <module>rpc</module>
         <module>gateway</module>
+        <module>spring-cloud-oauth2</module>
     </modules>
 
     <groupId>org.wmk</groupId>
