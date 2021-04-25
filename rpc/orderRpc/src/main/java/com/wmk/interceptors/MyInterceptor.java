@@ -21,8 +21,8 @@ public class MyInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        response.getWriter().write("被拦截。。。。");
-        return false;
+        //response.getWriter().write("被拦截。。。。");
+        return true;
     }
 
     @Override
