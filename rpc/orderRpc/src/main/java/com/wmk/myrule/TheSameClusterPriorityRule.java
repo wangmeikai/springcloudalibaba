@@ -45,6 +45,7 @@ public class TheSameClusterPriorityRule extends AbstractLoadBalancerRule {
         try {
             //第一步:获取当前服务所在的集群
             String currentClusterName = discoveryProperties.getClusterName();
+            String currentGroupName = discoveryProperties.getGroup();
 
             //第二步:获取一个负载均衡对象
             BaseLoadBalancer baseLoadBalancer = (BaseLoadBalancer) this.getLoadBalancer();
@@ -57,7 +58,8 @@ public class TheSameClusterPriorityRule extends AbstractLoadBalancerRule {
             NamingService namingService = nacosServiceManager.getNamingService(nacosDiscoveryProperties.getNacosProperties());
 
             //第五步:获取所有的服务实例
-            List<Instance> allInstance =  namingService.getAllInstances(invokedSerivceName);
+//            List<Instance> allInstance =  namingService.getAllInstances(invokedSerivceName);
+            List<Instance> allInstance =  namingService.selectInstances(invokedSerivceName,currentGroupName,true);
 
             List<Instance> theSameClusterNameInstList = new ArrayList<>();
 
