@@ -16,6 +16,9 @@
         <module>resource-server1</module>
         <module>resource-server2</module>
         <module>oauth-client</module>
+        <module>gateway-oauth2</module>
+        <module>gateway-resource-server1</module>
+        <module>gateway-resource-server2</module>
     </modules>
 
 

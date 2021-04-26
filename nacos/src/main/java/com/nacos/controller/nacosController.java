@@ -83,9 +83,9 @@ public class nacosController {
     @RequestMapping("/info1")
     @ResponseBody
     public List<Instance> get1() throws NacosException {
-        Properties properties = new Properties();
-        properties.setProperty("serverAddr","127.0.0.1:8848");
-        NamingService namingService = nacosServiceManager.getNamingService(properties);
+//        Properties properties = new Properties();
+//        properties.setProperty("serverAddr","127.0.0.1:8848");
+        NamingService namingService = nacosServiceManager.getNamingService(nacosDiscoveryProperties.getNacosProperties());
         List<Instance> allInstances = namingService.getAllInstances("provider-application");
 
 //        [

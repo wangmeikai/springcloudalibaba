@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @TIME: 15:03
  **/
 //feign不支持下划线_（会报错），支持横线-
-@FeignClient("productRpc-service")
+@FeignClient(value = "productRpc-service")
 public interface ProductFeignService {
 
     @GetMapping("/product/descProductCount")

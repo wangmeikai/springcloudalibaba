@@ -37,8 +37,8 @@ public class OrderServiceImpl implements OrderService {
         int i = orderMapper.addOrderCount();
         System.out.println("======================"+i);
         //int a = 1/0;
-        //String s = productFeignService.descProductCount();
-        //System.out.println("========================"+s);
+        String s = productFeignService.descProductCount();
+        System.out.println("========================"+s);
 
         return i;
     }
