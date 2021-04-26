@@ -26,7 +26,6 @@ import org.springframework.context.annotation.PropertySource;
 //        //@RibbonClient(xxxxx),
 //        //defaultConfiguration = xxxx.class  //指定全局默认配置
 //)
-//@PropertySource("classpath:ribbon.properties")
 public class RibbonConfig {
     @Bean  //全局负载均衡
     public IRule iRule(){
