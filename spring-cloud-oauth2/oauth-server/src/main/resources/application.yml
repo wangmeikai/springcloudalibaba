@@ -1,0 +1,13 @@
+server:
+  port: 9999
+
+#security:
+#  oauth2:
+#    client:
+#      client-id:
+#      client-secret:
+#      grant-type:
+#      scope:
+#      access-token-validity-seconds:
+#      resource-ids:
+#      registered-redirect-uri:
