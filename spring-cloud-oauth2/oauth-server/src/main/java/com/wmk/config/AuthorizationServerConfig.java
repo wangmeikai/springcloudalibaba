@@ -1,19 +1,21 @@
 package com.wmk.config;
 
-import com.wmk.utils.JsonSerializationStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
-import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+
+import java.util.HashMap;
 
 /**
  * @USER: WangMeiKai
@@ -88,5 +90,38 @@ public class AuthorizationServerConfig implements AuthorizationServerConfigurer 
         //生产上 需要把token存储到redis中或者使用jwt
         //endpoints.tokenStore(new RedisTokenStore(redisConnectionFactory).setSerializationStrategy(new JsonSerializationStrategy));
 //        endpoints.tokenStore(new JdbcTokenStore(dataSource));
+        endpoints.accessTokenConverter(jwtAccessTokenConverter());
     }
+
+
+    /**
+     * 这个组件 用于jwt basecode 字符串和 安全认证对象的信息转化
+     * @return
+     */
+    @Bean
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter(){
+            @Override
+            public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
+                HashMap<String, Object> additionalInformation = new HashMap<>();
+                additionalInformation.put("user_id", "001");
+                ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInformation);
+                return super.enhance(accessToken, authentication);
+            }
+        };
+        //jwt的密钥(用来保证jwt 字符串的安全性  jwt可以防止篡改  但是不能防窃听  所以jwt不要 放敏感信息)
+        //converter.setKeyPair(keyPair());
+        converter.setSigningKey("123456");
+        return converter;
+    }
+
+    /**
+     * KeyPair是 非对称加密的公钥和私钥的保存者
+     * @return
+     */
+//    @Bean
+//    public KeyPair keyPair() {
+//        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), "123456".toCharArray());
+//        return keyStoreKeyFactory.getKeyPair("jwt", "123456".toCharArray());
+//    }
 }
