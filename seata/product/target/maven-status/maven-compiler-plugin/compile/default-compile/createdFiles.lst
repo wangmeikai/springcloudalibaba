@@ -1,9 +1,0 @@
-com\wmk\controller\ProductController.class
-com\wmk\config\MybatisConfig.class
-META-INF\spring-configuration-metadata.json
-com\wmk\service\ProductService.class
-com\wmk\common\Result.class
-com\wmk\pojo\Product.class
-com\wmk\mapper\ProductMapper.class
-com\wmk\ProductMainApp.class
-com\wmk\service\impl\ProductServiceImpl.class
