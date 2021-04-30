@@ -1,6 +1,7 @@
 package com.wmk.utils;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.catalina.webresources.FileResource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
@@ -58,7 +59,8 @@ public class JWT {
         Map<String, Object> tokenMap = new HashMap<>();
         tokenMap.put("id", "1");
         tokenMap.put("name", "wmk");
-        tokenMap.put("roles", "ROLE_VIP,ROLE_USER");
+        tokenMap.put("iat", System.currentTimeMillis()/1000);  //签证时间
+        tokenMap.put("exp", System.currentTimeMillis()/1000 + 30);  //过期时间
 
         //生成Jwt令牌
         Jwt jwt = JwtHelper.encode(JSON.toJSONString(tokenMap), new RsaSigner(rsaPrivate));
@@ -70,7 +72,7 @@ public class JWT {
 
     public static void parseToken(){
         //令牌
-        String token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlcyI6IlJPTEVfVklQLFJPTEVfVVNFUiIsIm5hbWUiOiJ3bWsiLCJpZCI6IjEifQ.LdxnH2ZRRegmRCK0PhhS9ZSph5dPZ6MOF8a0v5u76bhgLfOr8uc4cmq1Ydv6kR0c4zkAcqwSWLpNo8OHWNj6aOWSzEzgT98fMt70z2Pmp213AT2X3i4wKFYR5kiExMu-cAPoTqvAcXJPlwjobdSkSWuKMz5ih6aFxbmeCoW2bK5KAhlGbn9Xs6ENGZ9cCez6AGNvTW2lZpZLzWAqSBjhaqmLoxUhBghu_aZB6gRafDQDghajLaZth5CKYzjVlzQt9jTHW95egTS0ES3qN1OpyW5qZAY7VQ9YUH7Moj3QjmMorMv-6J9LJ6pZQ0DmZvZWMbbBZ283WWopFEKo-xqbfg";
+        String token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoid21rIiwiaWQiOiIxIiwiZXhwIjoxNjE5Nzg2MDMzLCJpYXQiOjE2MTk3ODYwMDN9.PtSvY57LgYBbQbPcxZ_nplv2rJlAEgb4WjR3Mq8cmoDNSgAoYmqd6uXy3pkgAwxaiAWLv2ucwsrVfChjoARNim0w5tctA5QSF4hZSF_u1BiAQHbdEydnna9wEAARqBBCfPyEL5-hItlnp3bAoW-8wrB-M_nLfVZ3Q4K2u2G1dGM36M0l_Fibprx0RcKusi4t28AxyYVXt2fRnzvtmZsYtu8TOIoRRLIRC8KnGopAF-3uqScQ4houcdH0V8XnNniIS1QRZF0EKWxNZG_VLmFTIKoH264LA2c_-MsYs23IZvOBQP10eUnLY8nZMgJzV_fBB2uWMQMY_kWNIhVL6BMp7A";
 
         //公钥
         String publickey = "-----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgs+DYPQbwkCApblmXaxlSmjIAIaGfI/a/2OIm8jP2a0I9XIsi0dxWJqrtoDpGNEbbJ2QCwaKBWAuqieEfGIdRcY7nSm6rvC6AOGrd1qMMcKx/nQGnWkX9CqhZ0LXyRhKxZUD36ltuza98ekYg8RYAG7bM47BCfWwZxz/LaF5KYJy2LXCwg4ZfMipAmBQ06eXBdcH8UqgrQBcXKfjuavszBz4RbCpbxka9MfX0Tp4BGhnebpplUFAPPIQ8ESbfNvOb23Yl0MMCCHLWGwnTjeivi6e7ynI+MWvqIH7YhwKdmyHyVi12QRQHRWq/RPtirwg6lBESbL11ztT+jaIVzQQ4wIDAQAB-----END PUBLIC KEY-----";
@@ -80,7 +82,17 @@ public class JWT {
 
         //获取Jwt原始内容
         String claims = jwt.getClaims();
+
+        JSONObject jsonObject = JSON.parseObject(claims);
+        long exp = Long.parseLong(jsonObject.get("exp").toString());
+        System.out.println(exp);   //截止时间
+        System.out.println(System.currentTimeMillis()/1000);  //当前时间
+        if (exp < System.currentTimeMillis()/1000){
+            throw new RuntimeException("jwt 已过期");
+        }
+
         System.out.println(claims);
+
         //jwt令牌
         String encoded = jwt.getEncoded();
         System.out.println(encoded);
