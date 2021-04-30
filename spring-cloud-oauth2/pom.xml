@@ -19,6 +19,7 @@
         <module>gateway-oauth2</module>
         <module>resource-server1-gateway</module>
         <module>resource-server2-gateway</module>
+        <module>jwtTest</module>
     </modules>
 
 
