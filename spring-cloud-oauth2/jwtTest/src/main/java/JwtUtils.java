@@ -1,9 +1,11 @@
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 
 public class JwtUtils {
@@ -12,8 +14,9 @@ public class JwtUtils {
 
     public static void main(String[] args) throws InterruptedException {
         generateJwt();
-        TimeUnit.SECONDS.sleep(10);
+        //TimeUnit.SECONDS.sleep(10);
         testParseJwt();
+
     }
 
     public static void generateJwt() {
@@ -28,8 +31,8 @@ public class JwtUtils {
                 .setSubject("牛逼")       //设置主题  可以是JSON数据
                 .setIssuedAt(new Date())  //设置签发日期
                 .setClaims(claim)           //注意先后顺序
-                .setExpiration(new Date(System.currentTimeMillis()+1000 * 10))  //注意先后顺序
-                .signWith(SignatureAlgorithm.HS256, "wqeqwewqeqwewq");//设置签名 使用HS256算法，并设置SecretKey(字符串)
+                //.setExpiration(new Date(System.currentTimeMillis()+1000 * 10))  //注意先后顺序
+                .signWith(SignatureAlgorithm.HS256, "dasdasdas");//设置签名 使用HS256算法，并设置SecretKey(字符串)
 
         //构建 并返回一个字符串
         token = builder.compact();
@@ -38,7 +41,7 @@ public class JwtUtils {
 
     public static void testParseJwt() {
         Claims claims = Jwts.parser()
-                .setSigningKey("wqeqwewqeqwewq")
+                .setSigningKey("dasdasdas")
                 .parseClaimsJws(token)
                 .getBody();
 

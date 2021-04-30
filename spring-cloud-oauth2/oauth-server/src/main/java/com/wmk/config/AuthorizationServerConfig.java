@@ -110,7 +110,7 @@ public class AuthorizationServerConfig implements AuthorizationServerConfigurer 
             }
         };
         //jwt的密钥(用来保证jwt 字符串的安全性  jwt可以防止篡改  但是不能防窃听  所以jwt不要 放敏感信息)
-        //converter.setKeyPair(keyPair());
+//        converter.setKeyPair(keyPair());
         converter.setSigningKey("123456");
         return converter;
     }
@@ -121,7 +121,7 @@ public class AuthorizationServerConfig implements AuthorizationServerConfigurer 
      */
 //    @Bean
 //    public KeyPair keyPair() {
-//        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), "123456".toCharArray());
-//        return keyStoreKeyFactory.getKeyPair("jwt", "123456".toCharArray());
+//        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("test.jks"), "mypass".toCharArray());
+//        return keyStoreKeyFactory.getKeyPair("test", "mypass".toCharArray());
 //    }
 }
