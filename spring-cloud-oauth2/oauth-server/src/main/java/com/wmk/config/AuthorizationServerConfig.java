@@ -3,6 +3,7 @@ package com.wmk.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
@@ -13,8 +14,12 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
+import java.security.KeyPair;
 import java.util.HashMap;
 
 /**
@@ -32,6 +37,9 @@ public class AuthorizationServerConfig implements AuthorizationServerConfigurer 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private MyUserDetailsService userDetailsService;
+
     /**
      * 表示的资源服务器 校验token的时候需要干什么
      * (这里表示需要带入自己appid,和app secret)来进行验证
@@ -40,7 +48,9 @@ public class AuthorizationServerConfig implements AuthorizationServerConfigurer 
      */
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.checkTokenAccess("isAuthenticated()");
+        security.checkTokenAccess("isAuthenticated()")
+                .tokenKeyAccess("isAuthenticated()");  //来获取我们的tokenKey需要带入clientId, clientSecret
+        //security.allowFormAuthenticationForClients();  // 主要是让/oauth/token支持client_id以及client_secret作登录认证
     }
 
     /**
@@ -90,6 +100,8 @@ public class AuthorizationServerConfig implements AuthorizationServerConfigurer 
         //生产上 需要把token存储到redis中或者使用jwt
         //endpoints.tokenStore(new RedisTokenStore(redisConnectionFactory).setSerializationStrategy(new JsonSerializationStrategy));
 //        endpoints.tokenStore(new JdbcTokenStore(dataSource));
+        //endpoints.tokenStore(tokenStore());  //授权服务器颁发的token 怎么存储的
+        //endpoints.userDetailsService(userDetailsService);   //用户来获取token的时候需要 进行账号密码
         endpoints.accessTokenConverter(jwtAccessTokenConverter());
     }
 
@@ -110,8 +122,8 @@ public class AuthorizationServerConfig implements AuthorizationServerConfigurer 
             }
         };
         //jwt的密钥(用来保证jwt 字符串的安全性  jwt可以防止篡改  但是不能防窃听  所以jwt不要 放敏感信息)
-//        converter.setKeyPair(keyPair());
-        converter.setSigningKey("123456");
+        converter.setKeyPair(keyPair());
+//        converter.setSigningKey("123456");
         return converter;
     }
 
@@ -119,9 +131,15 @@ public class AuthorizationServerConfig implements AuthorizationServerConfigurer 
      * KeyPair是 非对称加密的公钥和私钥的保存者
      * @return
      */
+    @Bean
+    public KeyPair keyPair() {
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("key.jks"), "storepass".toCharArray());
+        return keyStoreKeyFactory.getKeyPair("token", "keypass".toCharArray());
+    }
+
+
 //    @Bean
-//    public KeyPair keyPair() {
-//        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("test.jks"), "mypass".toCharArray());
-//        return keyStoreKeyFactory.getKeyPair("test", "mypass".toCharArray());
+//    public TokenStore tokenStore(){
+//        return new JwtTokenStore(jwtAccessTokenConverter());
 //    }
 }

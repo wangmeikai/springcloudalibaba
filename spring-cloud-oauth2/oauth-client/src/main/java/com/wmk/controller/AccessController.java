@@ -19,6 +19,13 @@ import java.util.Objects;
 @RestController
 public class AccessController {
 
+    // 获取公钥地址
+    String get_tokenKey = "http://localhost:9999/oauth/token_key?client_id=xxx&client_secret=xxx";
+    // 获取授权码地址
+    String get_authorize_code = "http://localhost:9999/oauth/authorize?response_type=code&client_id=xxx&redirect_uri=http://localhost:8080/getToken1&state=xxx";
+    // 获取token地址（password  或  authorization_code）
+    String get_token = "http://localhost:9999/oauth/token_key?client_id=xxx&client_secret=xxx";
+
     @Autowired
     private RestTemplate restTemplate;
 
