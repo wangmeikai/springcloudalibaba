@@ -58,7 +58,8 @@ public class AuthorizationServerConfig implements AuthorizationServerConfigurer 
                 .scopes("read")   //颁发给令牌的权限
                 .accessTokenValiditySeconds(3600)   //令牌有效期
                 .resourceIds("resource-server1","resource-server2")   //颁发的令牌能访问哪些资源服务器
-                .redirectUris("http://www.baidu.com")   //授权码模式的回调地址
+                .redirectUris("http://localhost:8080/getToken1")   //授权码模式的回调地址
+                //.redirectUris("http://www.baidu.com")   //授权码模式的回调地址
            .and()
                 .withClient("resource-app1")   //允许哪些App能够访问  （能够访问的资源也要在此处配置）
                 .secret(passwordEncoder.encode("123456"))  //密码
