@@ -3,11 +3,10 @@ package com.wmk.controller;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Objects;
@@ -17,7 +16,7 @@ import java.util.Objects;
  * @DATE: 2021/4/26
  * @TIME: 9:32
  **/
-@Controller
+@RestController
 public class AccessController {
 
     @Autowired
@@ -32,7 +31,6 @@ public class AccessController {
      * @return
      */
     @GetMapping("/getToken")
-    @ResponseBody
     public String getToken_Password() {
         //String url = "http://localhost:9999/oauth/token?username='wmk'&password='wmk'&grant_type='password'&client_id='appId'&client_secret='123456'&scope='read'";
         String url = "http://localhost:9999/oauth/token";
@@ -68,7 +66,6 @@ public class AccessController {
      * @return
      */
     @GetMapping("/getToken1")
-    @ResponseBody
     public String getToken_Code(String code, String state) {
 
         System.out.println("================="+code);
@@ -85,6 +82,7 @@ public class AccessController {
         paramsMap.set("grant_type", "authorization_code");
         paramsMap.set("scope", "read");
         paramsMap.set("code",code);
+        //paramsMap.set("redirect_uri","http://localhost:8080/getToken1");
         paramsMap.set("redirect_uri","http://localhost:8080/getToken1");
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(paramsMap, headers);
         try {
@@ -117,14 +115,12 @@ public class AccessController {
 
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
 
-        //ResponseEntity<JSONObject> responseEntity = restTemplate.exchange(url, HttpMethod.POST, entity, JSONObject.class);
-        ResponseEntity<JSONObject> responseEntity = new RestTemplate().exchange(url, HttpMethod.POST, entity, JSONObject.class);
+        ResponseEntity<JSONObject> responseEntity = restTemplate.exchange(url, HttpMethod.POST, entity, JSONObject.class);
 
         return responseEntity;
     }
 
     @GetMapping("/r1")
-    @ResponseBody
     public String r1() {
 
         String url = "http://localhost:8888/r1";
