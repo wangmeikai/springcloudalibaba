@@ -97,7 +97,7 @@ public class AuthorizationServerConfig implements AuthorizationServerConfigurer 
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         //认证服务器委托一个AuthenticationManager 来验证我们的用户信息
         endpoints.authenticationManager(authenticationManager);
-        //生产上 需要把token存储到redis中或者使用jwt
+        //生产上 需要把token存储到redis中或者使用jwt    默认序列化器 StandardStringSerializationStrategy
         //endpoints.tokenStore(new RedisTokenStore(redisConnectionFactory).setSerializationStrategy(new JsonSerializationStrategy));
 //        endpoints.tokenStore(new JdbcTokenStore(dataSource));
         //endpoints.tokenStore(tokenStore());  //授权服务器颁发的token 怎么存储的
