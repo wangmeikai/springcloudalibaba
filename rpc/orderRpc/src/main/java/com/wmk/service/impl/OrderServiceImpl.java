@@ -7,6 +7,8 @@ import com.wmk.mapper.OrderMapper;
 import com.wmk.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Connection;
@@ -31,8 +33,8 @@ public class OrderServiceImpl implements OrderService {
         this.productFeignService = productFeignService;
     }
 
-    @Override
-    @Transactional
+    @Override                                          //mysql默认的事务隔离级别：可重复读
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ)
     public int addOrderCount() {
         int i = orderMapper.addOrderCount();
         System.out.println("======================"+i);
