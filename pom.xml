@@ -12,6 +12,8 @@
         <module>rpc</module>
         <module>gateway</module>
         <module>spring-cloud-oauth2</module>
+        <module>redis</module>
+        <module>rabbitmq</module>
     </modules>
 
     <groupId>org.wmk</groupId>
