@@ -17,10 +17,10 @@ public class Send {
     RabbitTemplate rabbitTemplate;
 
     @Resource
-    AmqpAdmin amqpAdmin;    //接口:AMQP规范中指定了如何配置queues, exchanges, and bindings
+    AmqpAdmin amqpAdmin;      //接口:AMQP规范中指定了如何配置queues, exchanges, and bindings
 
     @Resource
-    RabbitAdmin rabbitAdmin;  //RabbitMQ 实现类
+    RabbitAdmin rabbitAdmin;  //RabbitMQ 是 AmqpAdmin 的实现类，两处注入的是同一个对象
 
     public void sendMessage(String exchangeName,String routingKey,String msg){
         System.out.println("发送的消息为："+msg);

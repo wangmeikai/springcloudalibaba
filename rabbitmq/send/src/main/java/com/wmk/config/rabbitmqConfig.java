@@ -19,7 +19,7 @@ public class rabbitmqConfig {
 
     @Bean
     public ConnectionFactory connectionFactory(){
-        CachingConnectionFactory connectionFactory = new CachingConnectionFactory("127.0.0.1",5672);
+        CachingConnectionFactory connectionFactory = new CachingConnectionFactory("121.196.105.239",5672);
         connectionFactory.setUsername("wmk");
         connectionFactory.setPassword("wmk");
         connectionFactory.setVirtualHost("wmkHost");

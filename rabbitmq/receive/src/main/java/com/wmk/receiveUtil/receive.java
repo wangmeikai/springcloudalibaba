@@ -18,8 +18,8 @@ public class receive {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-//        channel.basicAck(msg.getMessageProperties().getDeliveryTag(),true);
-        channel.basicNack(msg.getMessageProperties().getDeliveryTag(),true,false);
+        channel.basicAck(msg.getMessageProperties().getDeliveryTag(),true);
+//        channel.basicNack(msg.getMessageProperties().getDeliveryTag(),true,false);
     }
 
     @RabbitListener(queues = "deadQueue", containerFactory = "simpleRabbitListenerContainerFactory")
