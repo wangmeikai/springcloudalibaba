@@ -1,0 +1,13 @@
+spring:
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: wmk
+    password: wmk
+    virtual-host: wmkHost
+#    listener:
+#      simple:
+#        acknowledge-mode: manual  # 手动应答
+
+server:
+  port: 8082
