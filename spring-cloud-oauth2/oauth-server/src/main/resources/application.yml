@@ -11,3 +11,10 @@ server:
 #      access-token-validity-seconds:
 #      resource-ids:
 #      registered-redirect-uri:
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource  # 可从类路径自动检测
+    url: jdbc:mysql://121.196.105.239:3306/order_table?serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root

@@ -20,6 +20,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
+import javax.sql.DataSource;
 import java.security.KeyPair;
 import java.util.HashMap;
 
@@ -40,6 +41,9 @@ public class AuthorizationServerConfig implements AuthorizationServerConfigurer 
 
     @Autowired
     private MyUserDetailsService userDetailsService;
+
+    @Autowired
+    private DataSource dataSource;
 
     /**
      * 表示的资源服务器 校验token的时候需要干什么
@@ -62,7 +66,7 @@ public class AuthorizationServerConfig implements AuthorizationServerConfigurer 
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        //clients.jdbc(datasource);
+        //clients.jdbc(dataSource);
         //clients.withClientDetails(new ClientDetailsService());
 
         clients.inMemory()  //基于内存的
