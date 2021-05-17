@@ -100,7 +100,7 @@ public class RedisService {
     @PostConstruct
     public void init(){
         Config config = new Config();
-        config.useSingleServer().setAddress("redis://192.168.40.3:6379");
+        config.useSingleServer().setAddress("redis://121.196.105.239:6379");
         redissonClient = Redisson.create(config);
     }
 
