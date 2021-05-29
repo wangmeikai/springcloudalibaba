@@ -17,6 +17,7 @@
         <module>zookeeper</module>
         <module>es</module>
         <module>distributedTransaction</module>
+        <module>rocketmq</module>
     </modules>
 
     <groupId>org.wmk</groupId>
