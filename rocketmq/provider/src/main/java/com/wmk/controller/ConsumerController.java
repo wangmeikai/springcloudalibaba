@@ -18,10 +18,11 @@ public class ConsumerController {
     @Resource
     private RocketMQTemplate rocketMQTemplate;
 
-    @GetMapping("consumer")
-    public String index(){
+    @GetMapping("/consumer")
+    public SendResult index(){
         SendResult result = rocketMQTemplate.syncSend(springTopic,"发送消息");
-        return "send_status:"+result.getSendStatus().name();
+        return result;
+        //return "send_status:"+result.getSendStatus().name();
     }
 
 }

@@ -17,7 +17,7 @@
 
 package com.wmk.consumer;
 
-import com.it.tl.edu.dto.OrderPaymentDto;
+import com.wmk.dto.OrderPaymentDto;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;

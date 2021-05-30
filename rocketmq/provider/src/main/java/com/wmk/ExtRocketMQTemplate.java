@@ -16,9 +16,9 @@
  */
 package com.wmk;
 
-import org.apache.rocketmq.spring.annotation.ExtRocketMQTemplateConfiguration;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
+//import org.apache.rocketmq.spring.annotation.ExtRocketMQTemplateConfiguration;
+//import org.apache.rocketmq.spring.core.RocketMQTemplate;
 
-@ExtRocketMQTemplateConfiguration(nameServer = "${tl.rocketmq.extNameServer}")
-public class ExtRocketMQTemplate extends RocketMQTemplate {
+//@ExtRocketMQTemplateConfiguration(nameServer = "${tl.rocketmq.extNameServer}")
+public class ExtRocketMQTemplate /*extends RocketMQTemplate*/ {
 }

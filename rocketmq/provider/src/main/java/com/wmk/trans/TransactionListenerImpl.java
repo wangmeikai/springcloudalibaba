@@ -9,13 +9,6 @@ import org.springframework.messaging.Message;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * @author ：图灵-杨过
- * @date：2019/11/6
- * @version: V1.0
- * @slogan: 天下风云出我辈，一入代码岁月催
- * @description :
- */
 @RocketMQTransactionListener(txProducerGroup = "myTxProducerGroup")
 public class TransactionListenerImpl implements RocketMQLocalTransactionListener {
     private AtomicInteger transactionIndex = new AtomicInteger(0);

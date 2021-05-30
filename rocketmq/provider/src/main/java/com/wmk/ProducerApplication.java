@@ -17,7 +17,7 @@ import java.util.List;
 
 
 @SpringBootApplication
-public class ProducerApplication implements CommandLineRunner {
+public class ProducerApplication /*implements CommandLineRunner*/ {
     private static final String TX_PGROUP_NAME = "myTxProducerGroup";
 
     @Resource
@@ -30,14 +30,14 @@ public class ProducerApplication implements CommandLineRunner {
     private String orderPaymentTopic;
     @Value("${tl.rocketmq.msgExtTopic}")
     private String msgExtTopic;
-    @Resource(name = "extRocketMQTemplate")
-    private RocketMQTemplate extRocketMQTemplate;
+//    @Resource(name = "extRocketMQTemplate")
+//    private RocketMQTemplate extRocketMQTemplate;
 
     public static void main(String[] args) {
         SpringApplication.run(ProducerApplication.class, args);
     }
 
-    @Override
+    //@Override
     public void run(String... args) throws Exception {
         // 发送字符串
         /*SendResult sendResult = rocketMQTemplate.syncSend(springTopic, "Hello, World!");
