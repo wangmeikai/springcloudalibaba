@@ -5,17 +5,26 @@ import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.MessageConversionException;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
 public class rabbitmqConfig {
+
+    @Resource
+    AmqpAdmin amqpAdmin;      //接口:AMQP规范中指定了如何配置queues, exchanges, and bindings
+
+    @Resource
+    RabbitAdmin rabbitAdmin;  //RabbitMQ 是 AmqpAdmin 的实现类，两处注入的是同一个对象
+
 
     @Bean
     public ConnectionFactory connectionFactory(){
@@ -110,6 +119,19 @@ public class rabbitmqConfig {
         //绑定一个队列 to: 绑定到哪个交换机上面 with：绑定的路由建（routingKey）
         //Binding binding = new Binding();
         return BindingBuilder.bind(queue).to(directExchange).with("direct.key");
+    }
+
+
+    public void creatDirectExchange(String exchangeName){
+        amqpAdmin.declareExchange(new DirectExchange(exchangeName));
+    }
+
+    public void creatQueue(String queueName){
+        amqpAdmin.declareQueue(new Queue(queueName,false));
+    }
+
+    public void creatBind(String queueName,String exchangeName,String routingKey){
+        amqpAdmin.declareBinding(new Binding(queueName, Binding.DestinationType.QUEUE,exchangeName,routingKey,null));
     }
 }
 
