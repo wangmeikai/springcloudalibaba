@@ -5,9 +5,9 @@ spring:
     username: wmk
     password: wmk
     virtual-host: wmkHost
-#    listener:
-#      simple:
-#        acknowledge-mode: manual  # 手动应答
-
+    listener:
+      simple:
+        acknowledge-mode: manual  # 手动应答
+        prefetch: 2500
 server:
   port: 8082

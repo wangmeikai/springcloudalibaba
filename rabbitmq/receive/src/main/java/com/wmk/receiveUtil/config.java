@@ -9,13 +9,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class config {
 
-    @Bean
+    //@Bean
     public SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory(ConnectionFactory connectionFactory){
         SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory = new SimpleRabbitListenerContainerFactory();
         simpleRabbitListenerContainerFactory.setConnectionFactory(connectionFactory);
         simpleRabbitListenerContainerFactory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
         simpleRabbitListenerContainerFactory.setPrefetchCount(2500);
-
         return simpleRabbitListenerContainerFactory;
     }
 }
