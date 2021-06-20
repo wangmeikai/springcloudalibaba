@@ -10,9 +10,9 @@ import org.springframework.context.annotation.Configuration;
  * @DATE: 2021/4/26
  * @TIME: 17:10
  **/
-@Configuration
+//@Configuration
 public class RibbonConfig {
-    @Bean
+//    @Bean
     public IRule iRule() {
         return new RandomRule();
     }
